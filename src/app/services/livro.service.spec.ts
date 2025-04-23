@@ -5,8 +5,11 @@ import { LivroService } from './livro.service';
 describe('LivroService', () => {
   let service: LivroService;
 
-  it('deveria ser criado', () => {
+  beforeEach(() => {
     service = new LivroService();
+  });
+
+  it('deveria ser criado', () => {
     expect(service).toBeTruthy();
   });
 
@@ -21,14 +24,12 @@ describe('LivroService', () => {
       dataLeitura: '2023-10-01',
     };
 
-    service = new LivroService();
     service.adicionarLivro(novoLivro);
     const livrosPorGenero = service.obterLivrosPorGenero('romance');
     expect(livrosPorGenero).toContain(novoLivro);
   });
 
   it('deveria recuperar corretamente os livros por gênero', () => {
-    service = new LivroService();
     const livrosPorGenero = service.obterLivrosPorGenero('romance');
     const livrosEsperados = livros.filter(livro => livro.genero.id === 'romance');
     expect(livrosPorGenero).toEqual(livrosEsperados);
